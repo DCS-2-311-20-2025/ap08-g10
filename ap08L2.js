@@ -62,7 +62,7 @@ export function init(scene, size, id, offset, texture) {
             if(i<16 || i > 22){
                 uvs.array[i] = sideUvS;
                 uvs.array[i+2] = sideUvE;
-            }
+            }a
             else{
                 uvs.array[i] = topUvS;
                 uvs.array[i+2] = topUvE;
