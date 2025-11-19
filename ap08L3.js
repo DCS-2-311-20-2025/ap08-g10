@@ -19,6 +19,7 @@ let course;
 export const origin = new THREE.Vector3();
 export const controlPoints = [
     [-25,-40],
+    [-10,-25],
     [ 30,-30],
     [ 50,  0],
     [-20,  0],
@@ -50,6 +51,19 @@ export function init(scene, size, id, offset, texture) {
     scene.add(plane);
 
     // ビル
+    // function makeBuilding(x, z, type) {
+    //     const height = [2, 2, 7, 4, 5];
+    //     const bldgH = height[type]*5;
+    //     const geometry = new THREE.BoxGeometry(8, bldgH, 8);
+    //     const material = new THREE.MeshLambertMaterial({color: 0x808080});
+    //     const bldg = new THREE.Mesh(
+    //         geometry,
+    //         material
+    //     )
+    //     bldg.position.set(50, 20, 0);
+    //     scene.add(bldg);
+    // }
+    // makeBuilding(20, 20, 0);
 
     // コース(描画)
     // 制御点を補完して曲線を作る
@@ -84,6 +98,22 @@ export function init(scene, size, id, offset, texture) {
 
 // コース(自動運転用)
 export function makeCourse(scene) {
+    const courseVectors = [];
+    const parts = [L3, L4, L1, L2];
+    parts.forEach((part) => {
+        part.controlPoints.forEach((p) => {
+            courseVectors.push(
+                new THREE.Vector3(
+                    p[0] + part.origin.x,
+                    0,
+                    p[1] + part.origin.z,
+                )
+            )
+        });
+    })
+    course = new THREE.CatmullRomCurve3(
+        courseVectors, true
+    )
 }
 
 // カメラを返す
