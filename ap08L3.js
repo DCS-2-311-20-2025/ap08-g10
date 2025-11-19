@@ -48,6 +48,16 @@ export function init(scene, size, id, offset, texture) {
     // ビル
 
     // コース(描画)
+    // 制御点を補完して曲線を作る
+    // course = new THREE.CatmullRomCurve3(
+    //     controlPoints.map((p) => {
+    //         return (new THREE.Vector3()).set(
+    //             offset.x + p[0],
+    //             0,
+    //             offset.z + p[1]
+    //         );
+    //     }), false
+    // )
 
 }
 
@@ -62,6 +72,10 @@ export function getCamera() {
 
 // 車の設定
 export function setCar(scene, car) {
+    const SCALE = 0.01;
+    car.position.copy(origin);
+    car.scale.set(SCALE, SCALE, SCALE);
+    scene.add(car);
 }
 
 // Windowサイズの変更処理
